@@ -1,0 +1,21 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - falkordb_data:/data
+
+  app:
+    build: .
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - falkordb
+    environment:
+      # This will pass your API key from the .env file to the container
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - FALKORDB_HOST=falkordb
+
+volumes:
+  falkordb_data:

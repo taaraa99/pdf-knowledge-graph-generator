@@ -1,0 +1,16 @@
+# Core pipeline for data processing and graph creation
+litellm
+falkordb
+unstructured[pdf]
+python-dotenv
+
+# For the Q&A API
+fastapi
+uvicorn[standard]
+
+# For the graph visualization
+networkx
+matplotlib
+
+# For running tests
+pytest
