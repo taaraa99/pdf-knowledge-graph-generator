@@ -89,7 +89,7 @@ This method is ideal for development and for running the application without Doc
 
 1.  **Clone the Repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone git@github.com:taaraa99/pdf-knowledge-graph-generator.git
     cd pdf-knowledge-graph-generator
     ```
 
