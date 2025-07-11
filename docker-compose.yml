@@ -1,0 +1,49 @@
+services:
+  # The FalkorDB service with a healthcheck
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: falkordb
+    ports:
+      - "6379:6379"
+    volumes:
+      - falkordb_data:/data
+    networks:
+      - graphrag-net
+    # Healthcheck to ensure FalkorDB is ready before the app starts
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # The Python application service
+  app:
+    build: .
+    container_name: graphrag_app
+    # This now waits for falkordb to be healthy, not just started
+    depends_on:
+      falkordb:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - FALKORDB_HOST=falkordb # Use the service name as the hostname
+    volumes:
+      # Mount your local files into the container for easy development
+      - ./app:/app/app
+      - ./data:/app/data
+      - ./ontology.json:/app/ontology.json
+      - ./graph.html:/app/graph.html # Mounts the output file
+    networks:
+      - graphrag-net
+    # Keep the container running to allow for `docker-compose exec` commands
+    entrypoint: tail
+    command: ["-f", "/dev/null"]
+
+networks:
+  graphrag-net:
+    driver: bridge
+
+volumes:
+  falkordb_data:

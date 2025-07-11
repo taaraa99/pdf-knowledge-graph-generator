@@ -1,0 +1,340 @@
+{
+  "entities": [
+    {
+      "label": "Paper",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "abstract",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Person",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "affiliation",
+          "type": "string",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Organization",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Concept",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": "Technical terms / algorithms (e.g. BERT, dropout)."
+    },
+    {
+      "label": "Model",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "family",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": "Named architectures (e.g. ResNet-50, T5-Small)."
+    },
+    {
+      "label": "Dataset",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "domain",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": "Benchmark datasets (e.g. ImageNet, LAMBADA)."
+    },
+    {
+      "label": "Metric",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "unique": false,
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": "Evaluation metrics (BLEU, F1, perplexity)."
+    },
+    {
+      "label": "Result",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "number",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "unique": false,
+          "required": false
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": "Concrete score a model achieved on a dataset/metric."
+    },
+    {
+      "label": "Task",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": "The NLP/CV task addressed (e.g. sentiment-analysis)."
+    },
+    {
+      "label": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": "High-level research domain (computer-vision, NLP\u00e2\u20ac\u00a6)."
+    },
+    {
+      "label": "ModelArchitecture",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Method",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "relations": [
+    {
+      "label": "AUTHORED",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Paper"
+      },
+      "attributes": []
+    },
+    {
+      "label": "AFFILIATED_WITH",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PROPOSED_IN",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Paper"
+      },
+      "attributes": []
+    },
+    {
+      "label": "EVALUATED_ON",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Dataset"
+      },
+      "attributes": []
+    },
+    {
+      "label": "MEASURED_BY",
+      "source": {
+        "label": "Result"
+      },
+      "target": {
+        "label": "Metric"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WORKS_AT",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WROTE",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Paper"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PUBLISHED_BY",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "INTRODUCED_IN",
+      "source": {
+        "label": "ModelArchitecture"
+      },
+      "target": {
+        "label": "Paper"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_AFFILIATION",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "AUTHOR",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Paper"
+      },
+      "attributes": []
+    },
+    {
+      "label": "AFFILIATION",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PROPOSED_METHOD",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Method"
+      },
+      "attributes": []
+    }
+  ]
+}

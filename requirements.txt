@@ -1,0 +1,23 @@
+#Core application framework
+typer[all]
+python-dotenv
+
+#GraphRAG SDK and dependencies
+graphrag-sdk
+falkordb
+
+#LLM provider - using LiteLLM to connect to OpenAI
+litellm
+openai
+
+#For PDF processing
+unstructured[pdf]
+
+#For visualization
+pyvis
+
+#Redis client for direct FalkorDB communication
+redis
+
+#for testing
+pytest
