@@ -201,6 +201,64 @@ This is the recommended method as it handles all dependencies and networking aut
     docker-compose down -v
     ```
 
+## Exploring the Graph
+
+After you have run the `build` command, you can use the following commands to explore the structure and content of your knowledge graph. This is useful for understanding what kind of information has been extracted and for formulating better questions.
+
+### `schema`
+
+The `schema` command displays the high-level structure (ontology) of your graph. It lists all the entity types (e.g., `Person`, `Paper`, `Concept`) and the relationship types that connect them.
+
+* **Usage (Local):**
+    ```bash
+    python -m app schema
+    ```
+* **Usage (Docker):**
+    ```bash
+    docker-compose exec app python -m app schema
+    ```
+* **Get live counts:**
+    You can add the `--counts` or `-c` flag to query the database and see how many nodes and edges of each type currently exist.
+    ```bash
+    python -m app schema --counts
+    ```
+
+### `relations`
+
+This command lists all the relationship types (e.g., `AUTHORED_BY`, `CITES`, `TOPIC_OF`) defined in the ontology.
+
+* **Usage (Local):**
+    ```bash
+    python -m app relations
+    ```
+* **Usage (Docker):**
+    ```bash
+    docker-compose exec app python -m app relations
+    ```
+* **Get live counts:**
+    Like the `schema` command, you can add the `--counts` or `-c` flag to see how many of each relationship exist in the graph.
+    ```bash
+    python -m app relations -c
+    ```
+
+### `concepts`
+
+This command lists all the nodes of a specific type that exist in the graph. By default, it lists all `Concept` nodes, but you can specify a different label.
+
+* **Usage (Local):**
+    ```bash
+    # List all 'Concept' nodes
+    python -m app concepts
+
+    # List all 'Person' nodes
+    python -m app concepts --label Person
+    ```
+* **Usage (Docker):**
+    ```bash
+    # List all 'Concept' nodes
+    docker-compose exec app python -m app concepts
+    ```
+
 ## Testing
 
 The project includes a test suite using `pytest`. The tests use mocking to isolate the application from external services, ensuring fast and reliable execution.

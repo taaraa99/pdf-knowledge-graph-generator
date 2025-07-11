@@ -203,6 +203,132 @@
         }
       ],
       "description": ""
+    },
+    {
+      "label": "Article",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "identifier",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "arxiv",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Conference",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "year",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Institution",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Technology",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "acronym",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Publication",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "year",
+          "type": "number",
+          "unique": false,
+          "required": false
+        },
+        {
+          "name": "journal",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "TechnicalDetail",
+      "attributes": [
+        {
+          "name": "detail",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Methodology",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
     }
   ],
   "relations": [
@@ -333,6 +459,120 @@
       },
       "target": {
         "label": "Method"
+      },
+      "attributes": []
+    },
+    {
+      "label": "AUTHORED_BY",
+      "source": {
+        "label": "Article"
+      },
+      "target": {
+        "label": "Person"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES",
+      "source": {
+        "label": "Methodology"
+      },
+      "target": {
+        "label": "Technology"
+      },
+      "attributes": []
+    },
+    {
+      "label": "COMPARED_WITH",
+      "source": {
+        "label": "Technology"
+      },
+      "target": {
+        "label": "Technology"
+      },
+      "attributes": [
+        {
+          "name": "bleu_score",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "PUBLISHED_AT",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Conference"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WRITTEN_BY",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Person"
+      },
+      "attributes": []
+    },
+    {
+      "label": "MENTIONED",
+      "source": {
+        "label": "Publication"
+      },
+      "target": {
+        "label": "Technology"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WORKS_FOR",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": [
+        {
+          "name": "role",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "PUBLISHED_IN",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ADDRESSES",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "INCLUDES",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "TechnicalDetail"
       },
       "attributes": []
     }
