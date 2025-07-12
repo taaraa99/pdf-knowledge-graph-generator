@@ -6,10 +6,15 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Install system dependencies required for PDF processing by unstructured.io
-# poppler-utils is for PDF rendering, and tesseract-ocr is for OCR
+# - poppler-utils: for PDF rendering
+# - tesseract-ocr: for OCR in PDFs and images
+# - libgl1-mesa-glx: required by OpenCV (a dependency of unstructured)
+# - libmagic-dev: for accurate filetype detection
 RUN apt-get update && apt-get install -y \
     poppler-utils \
     tesseract-ocr \
+    libgl1-mesa-glx \
+    libmagic-dev \
     && apt-get clean
 
 # Set the working directory inside the container
@@ -19,12 +24,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy your application code, data, and configuration files
-# These paths match your folder structure
+# Copy your application code into the container
 COPY ./app /app/app
-COPY ./data /app/data
-COPY ontology.json .
-COPY .env .
 
 # Specify the command to run on container startup
 ENTRYPOINT ["python", "-m", "app"]
