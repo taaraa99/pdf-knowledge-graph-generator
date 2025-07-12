@@ -1,4 +1,22 @@
-/venv
-venv
+# Virtual Environment
+/venv/
+venv/
+
+# Environment variables
 .env
-logs
+
+# Log files
+/logs/
+logs/
+
+# Python cache
+__pycache__/
+*.pyc
+/__pycache__/
+
+# Pytest cache
+.pytest_cache/
+
+# IDE/Editor specific
+.vscode/
+.idea/
