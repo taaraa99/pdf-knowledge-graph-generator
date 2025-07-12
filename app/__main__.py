@@ -4,10 +4,10 @@ import json
 import traceback
 import typer
 from dotenv import load_dotenv
-from pathlib import Path  
+from pathlib import Path
 
 import textwrap
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Iterator
 import random
 
 try:
@@ -15,24 +15,59 @@ try:
 except ImportError:
     Network = None  # we’ll error politely later
 
-
 # GraphRAG-SDK imports
-from graphrag_sdk import KnowledgeGraph, Ontology, Source  # ← Source is new
+from graphrag_sdk import KnowledgeGraph, Ontology, Source
+from graphrag_sdk.document import Document
 from graphrag_sdk.models.litellm import LiteModel
 from graphrag_sdk.model_config import KnowledgeGraphModelConfig
+
+# --- FINAL CORRECTED APPROACH: A standalone loader class ---
+# This fulfills the assignment requirement by preparing documents for the SDK.
+class UnstructuredPDFLoader:
+    """A standalone loader that uses unstructured.io to process a directory of PDFs."""
+    def __init__(self):
+        try:
+            from unstructured.partition.auto import partition
+        except ImportError:
+            raise ImportError(
+                "unstructured[pdf] package not found. Please install it with `pip install 'unstructured[pdf]'`"
+            )
+        self._partition = partition
+
+    def load(self, directory_path: str) -> List[Document]:
+        """
+        Loads all PDFs from a directory and returns a list of Document objects.
+        
+        Args:
+            directory_path (str): The path to the directory containing PDFs.
+        
+        Returns:
+            List[Document]: A list of Document objects, one for each PDF.
+        """
+        documents = []
+        typer.echo(f"Loading PDFs from '{directory_path}' using Unstructured.io...")
+        for f in os.listdir(directory_path):
+            if f.endswith(".pdf"):
+                path = os.path.join(directory_path, f)
+                typer.secho(f"  -> Processing: {f}", fg=typer.colors.CYAN)
+                elements = self._partition(filename=path)
+                full_text = "\n\n".join([str(el) for el in elements])
+                # --- FIXED: Use 'id' instead of 'source_id' for the Document constructor ---
+                documents.append(Document(full_text, id=path))
+        return documents
 
 # ── App setup ────────────────────────────────────────────
 app = typer.Typer(help="A CLI to build and query a PDF Knowledge Graph using the GraphRAG-SDK.")
 load_dotenv()
 
 # ── Configuration ────────────────────────────────────────
-INITIAL_PDF_DIR   = "data/initial_pdfs"
+INITIAL_PDF_DIR  = "data/initial_pdfs"
 ADDITIONAL_PDF_DIR = "data/additional_pdfs"
-GRAPH_NAME        = "assignment_kg"
-FALKORDB_HOST     = os.getenv("FALKORDB_HOST", "localhost")
-FALKORDB_PORT     = 6379
+GRAPH_NAME         = "assignment_kg"
+FALKORDB_HOST      = os.getenv("FALKORDB_HOST", "localhost")
+FALKORDB_PORT      = 6379
 ONTOLOGY_FILE      = "ontology.json"
-ONTO_PATH          = Path(ONTOLOGY_FILE) 
+ONTO_PATH          = Path(ONTOLOGY_FILE)
 
 def _normalise_schema(raw: dict) -> dict:
     """
@@ -53,7 +88,7 @@ def _merge_ontologies(a: Ontology, b: Ontology) -> Ontology:
     Return a new Ontology containing the union of entities / relations
     from A and B.  Very small utility until we upgrade the SDK.
     """
-    def _by_label(seq):          # helper → dict keyed by label
+    def _by_label(seq):         # helper → dict keyed by label
         return {item.label: item for item in seq}
 
     ent_map = _by_label(a.entities)
@@ -78,43 +113,26 @@ def build() -> None:
     """Build and evolve the knowledge graph from all PDF files."""
     typer.echo("🚀 Starting the knowledge-graph build process…")
     try:
-        # ── Step 1: Create ontology ───────────────────────
-        typer.echo("--- Step 1: Creating Ontology ---")
-        initial_sources = [
-            Source(os.path.join(INITIAL_PDF_DIR, f))
-            for f in os.listdir(INITIAL_PDF_DIR)
-            if f.endswith(".pdf")
-        ]
-
-        model = LiteModel(model_name="openai/gpt-4o")
-
-        typer.echo(f"Creating ontology from {len(initial_sources)} initial PDFs, one by one…")
-        successful_sources: list[Source] = []
-
-        for i, src in enumerate(initial_sources):
-            fname = os.path.basename(src.data_source)
-            typer.echo(f"\n--- Processing file {i + 1}/{len(initial_sources)}: {fname} ---")
-            try:
-                Ontology.from_sources([src], model=model)
-                typer.secho(f"✅ Successfully processed {fname}", fg=typer.colors.GREEN)
-                successful_sources.append(src)
-            except Exception as e:
-                typer.secho(f">>>> FAILED on file: {fname} <<<<", fg=typer.colors.RED)
-                traceback.print_exception(e)
-
-        if not successful_sources:
-            typer.secho("No PDFs could be processed successfully. Aborting.", fg=typer.colors.RED)
+        # ── Step 1: Load documents with our custom loader ──
+        pdf_loader = UnstructuredPDFLoader()
+        initial_docs = pdf_loader.load(INITIAL_PDF_DIR)
+        
+        if not initial_docs:
+            typer.secho(f"No PDFs found in '{INITIAL_PDF_DIR}'. Aborting.", fg=typer.colors.RED)
             raise typer.Exit()
 
-        typer.echo("🔍  Discovering ontology from PDFs …")
-        discovered = Ontology.from_sources(initial_sources, model=model)
+        # ── Step 2: Create ontology from the loaded documents ──
+        typer.echo("\n--- Step 2: Creating Ontology ---")
+        model = LiteModel(model_name="openai/gpt-4o")
+        
+        typer.echo("🔍 Discovering ontology from documents…")
+        discovered = Ontology.from_documents(initial_docs, model=model)
 
-        # ── 3. Option A – merge with existing file ────────
         if ONTO_PATH.exists():
             typer.echo("📄  Merging with existing ontology.json")
             raw_json  = json.loads(ONTO_PATH.read_text())
-            existing  = Ontology.from_json(_normalise_schema(raw_json)) 
-            ontology  = _merge_ontologies(existing, discovered) 
+            existing  = Ontology.from_json(_normalise_schema(raw_json))
+            ontology  = _merge_ontologies(existing, discovered)
         else:
             typer.echo("📄  No existing ontology.json, using discovered one")
             ontology   = discovered
@@ -122,8 +140,8 @@ def build() -> None:
         ONTO_PATH.write_text(json.dumps(ontology.to_json(), indent=2))
         typer.secho("✓  ontology.json updated", fg=typer.colors.GREEN)
 
-        # ── Step 2: Create and evolve the knowledge graph ─
-        typer.echo("\n--- Step 2: Creating and Evolving Knowledge Graph ---")
+        # ── Step 3: Create and evolve the knowledge graph ──
+        typer.echo("\n--- Step 3: Creating and Evolving Knowledge Graph ---")
         kg = KnowledgeGraph(
             name=GRAPH_NAME,
             model_config=KnowledgeGraphModelConfig.with_model(model),
@@ -132,19 +150,16 @@ def build() -> None:
             port=FALKORDB_PORT,
         )
 
-        typer.echo(f"\nIngesting {len(successful_sources)} initial PDFs…")
-        kg.process_sources(successful_sources)
+        typer.echo(f"\nIngesting {len(initial_docs)} initial documents…")
+        kg.process_documents(initial_docs)
         typer.secho("✅ Initial ingestion complete.", fg=typer.colors.GREEN)
 
-        typer.echo("\nEvolving graph with all available PDFs…")
-        additional_sources = [
-            Source(os.path.join(ADDITIONAL_PDF_DIR, f))
-            for f in os.listdir(ADDITIONAL_PDF_DIR)
-            if f.endswith(".pdf")
-        ]
-        all_sources = successful_sources + additional_sources
+        typer.echo("\n--- Step 4: Evolving graph with additional documents ---")
+        additional_docs = pdf_loader.load(ADDITIONAL_PDF_DIR)
+        all_docs = initial_docs + additional_docs
 
-        kg.process_sources(all_sources)
+        typer.echo(f"\nEvolving graph with all {len(all_docs)} documents…")
+        kg.process_documents(all_docs)
         typer.secho("✅ Graph evolution complete.", fg=typer.colors.GREEN)
 
         typer.secho("\n🎉 Knowledge-graph build finished successfully!", fg=typer.colors.BRIGHT_GREEN)
@@ -316,7 +331,6 @@ def visualize(
             r = redis.Redis(host=FALKORDB_HOST, port=FALKORDB_PORT,
                             decode_responses=True)
 
-            # NEW: Query now includes node degrees to size nodes by importance
             query = f"""
             MATCH (a)-[r]->(b)
             RETURN id(a)                                   AS from_id,
@@ -349,7 +363,6 @@ def visualize(
         net = Network(height="800px", width="100%", bgcolor="#222222",
                       font_color="white", directed=True, notebook=False)
 
-        # NEW: Consistent color mapping for node labels
         PREDEFINED_COLORS = [
             "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
             "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
@@ -364,14 +377,12 @@ def visualize(
                 next_color_idx += 1
             return colour_map[label]
 
-        # Keep track of nodes already added to avoid duplicates
         added_nodes = set()
 
         for (
             from_id, to_id, from_label, to_label,
             rel, from_text, to_text, from_degree, to_degree
         ) in rows:
-            # Add source node if not already present
             if from_id not in added_nodes:
                 net.add_node(
                     from_id,
@@ -379,12 +390,10 @@ def visualize(
                     title=f"{from_text}\nLabel: {from_label}\nDegree: {from_degree}",
                     color=colour_for(from_label),
                     shape="dot",
-                    # NEW: Size nodes based on their degree
                     size=10 + int(from_degree) * 2
                 )
                 added_nodes.add(from_id)
 
-            # Add target node if not already present
             if to_id not in added_nodes:
                 net.add_node(
                     to_id,
@@ -396,10 +405,8 @@ def visualize(
                 )
                 added_nodes.add(to_id)
 
-            # Add the edge connecting them
             net.add_edge(from_id, to_id, label=rel, arrows="to")
 
-        # NEW: Enable interactive filtering UI in the output HTML
         net.show_buttons(filter_=['nodes', 'edges', 'physics'])
 
         net.set_options("""
@@ -435,8 +442,6 @@ def visualize(
 
 
 
-
-
 @app.command()
 def concepts(
     label: str = typer.Option("Concept", "--label", "-l", help="Node label to list")
@@ -457,7 +462,6 @@ def concepts(
                 "--compact"
             )
             await r.aclose()
-            # convert every item to a plain string so _print_table is happy
             return [(str(row[0]), str(row[1])) for row in res[1:] if row]
 
         rows = asyncio.run(_fetch())
@@ -470,7 +474,6 @@ def concepts(
         typer.secho(f"🔥  Error: {e}", fg=typer.colors.RED)
         traceback.print_exception(e)
 
-# ── NEW: list relation labels ────────────────────────────
 @app.command()
 def relations(
     counts: bool = typer.Option(
@@ -486,10 +489,9 @@ def relations(
     try:
         if not ONTO_PATH.exists():
             typer.secho("Run `python -m app build` first – no ontology found.",
-                         fg=typer.colors.RED)
+                          fg=typer.colors.RED)
             raise typer.Exit()
 
-        # -------- load ontology & collect labels -------------
         onto_json   = json.loads(ONTO_PATH.read_text())
         rel_labels  = [rel["label"] for rel in onto_json.get("relations", [])]
 
@@ -497,7 +499,6 @@ def relations(
             typer.secho("Ontology contains no relations.", fg=typer.colors.YELLOW)
             raise typer.Exit()
 
-        # -------- optional live counts -----------------------
         counts_map: dict[str, int] = {}
         if counts:
             try:
@@ -515,7 +516,6 @@ def relations(
                     res = await r.execute_command("GRAPH.QUERY",
                                                   GRAPH_NAME, q, "--compact")
 
-                    # res[1] holds the first data row; drill down until scalar
                     val = res[1]
                     while isinstance(val, list):
                         val = val[0]
@@ -523,7 +523,9 @@ def relations(
 
                 await r.aclose()
                 return out
-        # -------- pretty print -------------------------------
+            
+            counts_map = asyncio.run(_get_counts())
+
         rows = [(lbl, str(counts_map.get(lbl, ""))) for lbl in rel_labels]
         _print_table(rows, "🔗  RELATION LABELS")
 
