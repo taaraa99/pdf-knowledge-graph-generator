@@ -39,14 +39,24 @@ def schema(counts: bool = typer.Option(False, "--counts", "-c", help="Show live 
             async def _count_labels() -> Tuple[dict, dict]:
                 r = redis.Redis(host=config.FALKORDB_HOST, port=config.FALKORDB_PORT, decode_responses=True)
                 node_ct, edge_ct = {}, {}
+                
+                # --- FIXED: Correctly parse nested list response ---
                 for lbl, _ in node_rows:
                     q = f"MATCH (n:{lbl}) RETURN count(n)"
                     res = await r.execute_command("GRAPH.QUERY", config.GRAPH_NAME, q, "--compact")
-                    node_ct[lbl] = int(res[1][0])
+                    val = res[1]
+                    while isinstance(val, list):
+                        val = val[0]
+                    node_ct[lbl] = int(val)
+
                 for lbl, _ in rel_rows:
                     q = f"MATCH ()-[:{lbl}]->() RETURN count(*)"
                     res = await r.execute_command("GRAPH.QUERY", config.GRAPH_NAME, q, "--compact")
-                    edge_ct[lbl] = int(res[1][0])
+                    val = res[1]
+                    while isinstance(val, list):
+                        val = val[0]
+                    edge_ct[lbl] = int(val)
+                
                 await r.close()
                 return node_ct, edge_ct
 

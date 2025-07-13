@@ -329,6 +329,870 @@
         }
       ],
       "description": ""
+    },
+    {
+      "label": "Technique",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "TestSet",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Framework",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Algorithm",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Corpus",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "NeuralNetwork",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "unique": false,
+          "required": false
+        },
+        {
+          "name": "number_of_layers",
+          "type": "number",
+          "unique": false,
+          "required": false
+        },
+        {
+          "name": "dimensionality",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "System",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "LSTM",
+      "attributes": [
+        {
+          "name": "parameter_count",
+          "type": "number",
+          "unique": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "TranslationTask",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "source_language",
+          "type": "string",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "target_language",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Company",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Vocabulary",
+      "attributes": [
+        {
+          "name": "size",
+          "type": "number",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "University",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Approach",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Component",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Translation",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Language",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "MachineTranslation",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Network",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Cell",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Block",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "HiddenLayer",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Input",
+      "attributes": [
+        {
+          "name": "symbol",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "ReberGrammar",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Output",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Parameter",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Software",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Lstm",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "parameter_count",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Attention",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "SequenceTransduction",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "SelfAttention",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Uses",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "WordVector",
+      "attributes": [
+        {
+          "name": "dimensionality",
+          "type": "number",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Grammar",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "State",
+      "attributes": [
+        {
+          "name": "symbol",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Alignment",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Dimension",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "BLEU",
+      "attributes": [
+        {
+          "name": "score",
+          "type": "number",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "task",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Layer",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Encoding",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "TrainingRegime",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "PennTreebank",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Checkpoint",
+      "attributes": [
+        {
+          "name": "description",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "FloatingPointOperation",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "number",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Bleu",
+      "attributes": [
+        {
+          "name": "score",
+          "type": "number",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "task",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Location",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "DeepNeuralNetwork",
+      "attributes": [
+        {
+          "name": "abbreviation",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "LongShortTermMemory",
+      "attributes": [
+        {
+          "name": "abbreviation",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "StatisticalMachineTranslation",
+      "attributes": [
+        {
+          "name": "abbreviation",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Dimensionality",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "number",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Epoch",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "number",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "HiddenState",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "number",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "RNN",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "BLEUScore",
+      "attributes": [
+        {
+          "name": "score",
+          "type": "number",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "task",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Training",
+      "attributes": [
+        {
+          "name": "duration",
+          "type": "string",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "gpus",
+          "type": "number",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Work",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Loss",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Rnn",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "BleuScore",
+      "attributes": [
+        {
+          "name": "score",
+          "type": "number",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "task",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Performance",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Affiliation",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Author",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Publisher",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
     }
   ],
   "relations": [
@@ -573,6 +1437,583 @@
       },
       "target": {
         "label": "TechnicalDetail"
+      },
+      "attributes": []
+    },
+    {
+      "label": "IMPLEMENTED_IN",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Framework"
+      },
+      "attributes": []
+    },
+    {
+      "label": "APPLIES_TO",
+      "source": {
+        "label": "Technique"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TRAINED_ON",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Corpus"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PROPOSED_BY",
+      "source": {
+        "label": "Algorithm"
+      },
+      "target": {
+        "label": "Person"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_ALGORITHM",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Algorithm"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TESTED_ON",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "TestSet"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PERFORMS_ON",
+      "source": {
+        "label": "NeuralNetwork"
+      },
+      "target": {
+        "label": "Dataset"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REPORTS",
+      "source": {
+        "label": "NeuralNetwork"
+      },
+      "target": {
+        "label": "Metric"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PRESENTS",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Technique"
+      },
+      "attributes": []
+    },
+    {
+      "label": "EMPLOYS",
+      "source": {
+        "label": "TranslationTask"
+      },
+      "target": {
+        "label": "Vocabulary"
+      },
+      "attributes": []
+    },
+    {
+      "label": "RESEARCHED",
+      "source": {
+        "label": "Approach"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USED_IN",
+      "source": {
+        "label": "Component"
+      },
+      "target": {
+        "label": "System"
+      },
+      "attributes": []
+    },
+    {
+      "label": "MEMBER_OF",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TRANSLATES",
+      "source": {
+        "label": "System"
+      },
+      "target": {
+        "label": "Language"
+      },
+      "attributes": []
+    },
+    {
+      "label": "INVOLVED_IN",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "MachineTranslation"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS",
+      "source": {
+        "label": "Network"
+      },
+      "target": {
+        "label": "Input"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PART_OF",
+      "source": {
+        "label": "Cell"
+      },
+      "target": {
+        "label": "Network"
+      },
+      "attributes": []
+    },
+    {
+      "label": "LOCATED_IN",
+      "source": {
+        "label": "HiddenLayer"
+      },
+      "target": {
+        "label": "Network"
+      },
+      "attributes": []
+    },
+    {
+      "label": "BELONGS_TO",
+      "source": {
+        "label": "Input"
+      },
+      "target": {
+        "label": "ReberGrammar"
+      },
+      "attributes": []
+    },
+    {
+      "label": "GENERATES",
+      "source": {
+        "label": "ReberGrammar"
+      },
+      "target": {
+        "label": "Output"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ATTENDED",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Conference"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PERFORMED_ON",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "IS_A",
+      "source": {
+        "label": "SelfAttention"
+      },
+      "target": {
+        "label": "Attention"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USED_FOR",
+      "source": {
+        "label": "Attention"
+      },
+      "target": {
+        "label": "SequenceTransduction"
+      },
+      "attributes": []
+    },
+    {
+      "label": "DEVELOPED_BY",
+      "source": {
+        "label": "Software"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "IS_PART_OF",
+      "source": {
+        "label": "Lstm"
+      },
+      "target": {
+        "label": "NeuralNetwork"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PERFORMS",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "BASED_ON",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Algorithm"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REPRESENTS",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "WordVector"
+      },
+      "attributes": []
+    },
+    {
+      "label": "IS_USED_FOR",
+      "source": {
+        "label": "Technique"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "DEFINED_BY",
+      "source": {
+        "label": "State"
+      },
+      "target": {
+        "label": "Grammar"
+      },
+      "attributes": []
+    },
+    {
+      "label": "INPUT_TO",
+      "source": {
+        "label": "Input"
+      },
+      "target": {
+        "label": "Cell"
+      },
+      "attributes": []
+    },
+    {
+      "label": "OUTPUT_FROM",
+      "source": {
+        "label": "Cell"
+      },
+      "target": {
+        "label": "Output"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WORKS_ON",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "MachineTranslation"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_MODEL",
+      "source": {
+        "label": "TranslationTask"
+      },
+      "target": {
+        "label": "Model"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_ALIGNMENT",
+      "source": {
+        "label": "MachineTranslation"
+      },
+      "target": {
+        "label": "Alignment"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ACHIEVED",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "BLEU"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_PARAMETER",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Parameter"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TRAINED_WITH",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "TrainingRegime"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_ENCODING",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Encoding"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PRESENTED_AT",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Conference"
+      },
+      "attributes": []
+    },
+    {
+      "label": "IS_AUTHOR",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "LongShortTermMemory"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ACHIEVES",
+      "source": {
+        "label": "LongShortTermMemory"
+      },
+      "target": {
+        "label": "Metric"
+      },
+      "attributes": []
+    },
+    {
+      "label": "RESCORING",
+      "source": {
+        "label": "LongShortTermMemory"
+      },
+      "target": {
+        "label": "System"
+      },
+      "attributes": []
+    },
+    {
+      "label": "APPLIED_TO",
+      "source": {
+        "label": "LongShortTermMemory"
+      },
+      "target": {
+        "label": "Dataset"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_LANGUAGE",
+      "source": {
+        "label": "LongShortTermMemory"
+      },
+      "target": {
+        "label": "Language"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REPRESENTATION_OF",
+      "source": {
+        "label": "WordVector"
+      },
+      "target": {
+        "label": "Language"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_DIMENSIONALITY",
+      "source": {
+        "label": "WordVector"
+      },
+      "target": {
+        "label": "Dimensionality"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TRAINED_FOR",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Epoch"
+      },
+      "attributes": []
+    },
+    {
+      "label": "CONTAINS",
+      "source": {
+        "label": "Cell"
+      },
+      "target": {
+        "label": "Block"
+      },
+      "attributes": []
+    },
+    {
+      "label": "CONNECTED_TO",
+      "source": {
+        "label": "Input"
+      },
+      "target": {
+        "label": "Network"
+      },
+      "attributes": []
+    },
+    {
+      "label": "COMPARABLE_TO",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "System"
+      },
+      "attributes": [
+        {
+          "name": "performance",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "USES_RNN",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "RNN"
+      },
+      "attributes": []
+    },
+    {
+      "label": "AUTHOR_OF",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Work"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_METRIC",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Metric"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_DIMENSION",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Dimension"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_LOSS",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Loss"
       },
       "attributes": []
     }

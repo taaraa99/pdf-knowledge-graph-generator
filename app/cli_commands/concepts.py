@@ -5,7 +5,7 @@ import traceback
 from app import config, utils
 
 def concepts(label: str = typer.Option("Concept", "--label", "-l", help="Node label to list")):
-    """List all Concept (or Metric / Dataset …) nodes currently in FalkorDB."""
+    """List all nodes of a given label, like Concept, Paper, or Person."""
     try:
         try:
             import redis.asyncio as redis
@@ -16,17 +16,30 @@ def concepts(label: str = typer.Option("Concept", "--label", "-l", help="Node la
 
         async def _fetch():
             r = redis.Redis(host=config.FALKORDB_HOST, port=config.FALKORDB_PORT, decode_responses=True)
+            
+            # CORRECTED QUERY: Use coalesce to handle different name properties (name vs title)
+            # and properly group by the name to get counts.
+            query = f"""
+            MATCH (n:{label})
+            WITH coalesce(n.title, n.name) AS name
+            WHERE name IS NOT NULL
+            RETURN name, count(name) AS occurrences
+            ORDER BY occurrences DESC
+            """
             res = await r.execute_command(
                 "GRAPH.QUERY", config.GRAPH_NAME,
-                f"MATCH (n:`{label}`) RETURN n.name, count(n) ORDER BY count(n) DESC",
+                query,
                 "--compact"
             )
             await r.aclose()
-            return [(str(row[0]), str(row[1])) for row in res[1:] if row]
+            
+            # The response has a header row, so we skip it (res[1:])
+            # Each row should now correctly have two items.
+            return [(str(row[0]), str(row[1])) for row in res[1:] if row and len(row) == 2]
 
         rows = asyncio.run(_fetch())
         if not rows:
-            typer.secho(f"No nodes with label '{label}' found.", fg=typer.colors.YELLOW)
+            typer.secho(f"No nodes with label '{label}' found, or they have no 'name' or 'title' property.", fg=typer.colors.YELLOW)
         else:
             utils.print_table(rows, f"🗂️  {label.upper()} NODES")
 

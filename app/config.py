@@ -18,4 +18,4 @@ FALKORDB_HOST = os.getenv("FALKORDB_HOST", "localhost")
 FALKORDB_PORT = int(os.getenv("FALKORDB_PORT", 6379))
 
 # LLM Configuration
-MODEL_NAME = "openai/gpt-4o"
+DEFAULT_MODEL_NAME = "openai/gpt-4o"

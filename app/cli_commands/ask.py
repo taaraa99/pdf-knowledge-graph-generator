@@ -10,7 +10,15 @@ from graphrag_sdk.model_config import KnowledgeGraphModelConfig
 
 from app import config
 
-def ask(question: str = typer.Argument(..., help="Your natural-language question.")):
+def ask(
+    question: str = typer.Argument(..., help="Your natural-language question."),
+    model: str = typer.Option(
+        config.DEFAULT_MODEL_NAME,
+        "--model",
+        "-m",
+        help="The model to use for answering, e.g., 'openai/gpt-4.1' or 'ollama/llama3'."
+    )
+):
     """Ask a question against the knowledge graph."""
     typer.echo(f"❓ Asking: '{question}'")
     try:
@@ -20,11 +28,12 @@ def ask(question: str = typer.Argument(..., help="Your natural-language question
 
         with open(config.ONTOLOGY_FILE, "r", encoding="utf-8") as file:
             ontology = Ontology.from_json(json.load(file))
-
-        model = LiteModel(model_name=config.MODEL_NAME)
+        
+        typer.echo(f"--- Using model: {model} ---")
+        llm = LiteModel(model_name=model)
         kg = KnowledgeGraph(
             name=config.GRAPH_NAME,
-            model_config=KnowledgeGraphModelConfig.with_model(model),
+            model_config=KnowledgeGraphModelConfig.with_model(llm),
             ontology=ontology,
             host=config.FALKORDB_HOST,
             port=config.FALKORDB_PORT,
