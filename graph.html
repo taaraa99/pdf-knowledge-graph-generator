@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#5E81AC", "font": {"color": "white"}, "id": 0, "label": "0", "shape": "dot", "size": 26, "title": "0\nLabel: Net\nDegree: 8"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 1, "label": "1", "shape": "dot", "size": 10, "title": "1\nLabel: State\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 2, "label": "2", "shape": "dot", "size": 10, "title": "2\nLabel: State\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 3, "label": "REBER GRAMMAR", "shape": "dot", "size": 20, "title": "REBER GRAMMAR\nLabel: ReberGrammar\nDegree: 5"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 4, "label": "4", "shape": "dot", "size": 12, "title": "4\nLabel: State\nDegree: 1"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 5, "label": "5", "shape": "dot", "size": 12, "title": "5\nLabel: Hidden\nDegree: 1"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 6, "label": "6", "shape": "dot", "size": 14, "title": "6\nLabel: Input\nDegree: 2"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 7, "label": "7", "shape": "dot", "size": 14, "title": "7\nLabel: Input\nDegree: 2"}, {"color": "#B48EAD", "font": {"color": "white"}, "id": 8, "label": "out 1", "shape": "dot", "size": 12, "title": "out 1\nLabel: Output\nDegree: 1"}, {"color": "#BF616A", "font": {"color": "white"}, "id": 9, "label": "9", "shape": "dot", "size": 22, "title": "9\nLabel: Cell\nDegree: 6"}, {"color": "#D08770", "font": {"color": "white"}, "id": 10, "label": "block", "shape": "dot", "size": 30, "title": "block\nLabel: Block\nDegree: 10"}, {"color": "#EBCB8B", "font": {"color": "white"}, "id": 11, "label": "11", "shape": "dot", "size": 16, "title": "11\nLabel: HiddenLayer\nDegree: 3"}, {"color": "#BF616A", "font": {"color": "white"}, "id": 12, "label": "12", "shape": "dot", "size": 22, "title": "12\nLabel: Cell\nDegree: 6"}, {"color": "#EBCB8B", "font": {"color": "white"}, "id": 13, "label": "13", "shape": "dot", "size": 16, "title": "13\nLabel: HiddenLayer\nDegree: 3"}, {"color": "#B48EAD", "font": {"color": "white"}, "id": 14, "label": "out 2", "shape": "dot", "size": 12, "title": "out 2\nLabel: Output\nDegree: 1"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 15, "label": "15", "shape": "dot", "size": 18, "title": "15\nLabel: Input\nDegree: 4"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 16, "label": "16", "shape": "dot", "size": 18, "title": "16\nLabel: Input\nDegree: 4"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 17, "label": "17", "shape": "dot", "size": 18, "title": "17\nLabel: Input\nDegree: 4"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 18, "label": "REBER", "shape": "dot", "size": 16, "title": "REBER\nLabel: ReberGrammar\nDegree: 3"}, {"color": "#D8DEE9", "font": {"color": "white"}, "id": 19, "label": "GRAMMAR", "shape": "dot", "size": 16, "title": "GRAMMAR\nLabel: Grammar\nDegree: 3"}, {"color": "#5E81AC", "font": {"color": "white"}, "id": 20, "label": "NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE", "shape": "dot", "size": 44, "title": "NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE\nLabel: Paper\nDegree: 17"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 21, "label": "Dzmitry Bahdanau", "shape": "dot", "size": 24, "title": "Dzmitry Bahdanau\nLabel: Person\nDegree: 7"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 22, "label": "Jacobs University Bremen", "shape": "dot", "size": 18, "title": "Jacobs University Bremen\nLabel: University\nDegree: 4"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 23, "label": "ICLR", "shape": "dot", "size": 12, "title": "ICLR\nLabel: Organization\nDegree: 1"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 24, "label": "ICLR", "shape": "dot", "size": 24, "title": "ICLR\nLabel: Conference\nDegree: 7"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 25, "label": "KyungHyun Cho", "shape": "dot", "size": 22, "title": "KyungHyun Cho\nLabel: Person\nDegree: 6"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 26, "label": "Universit\u00b4e de Montr\u00b4eal", "shape": "dot", "size": 16, "title": "Universit\u00b4e de Montr\u00b4eal\nLabel: University\nDegree: 3"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 27, "label": "Yoshua Bengio", "shape": "dot", "size": 24, "title": "Yoshua Bengio\nLabel: Person\nDegree: 7"}, {"color": "#B48EAD", "font": {"color": "white"}, "id": 28, "label": "28", "shape": "dot", "size": 16, "title": "28\nLabel: NeuralMachineTranslation\nDegree: 3"}, {"color": "#BF616A", "font": {"color": "white"}, "id": 29, "label": "29", "shape": "dot", "size": 14, "title": "29\nLabel: MachineTranslation\nDegree: 2"}, {"color": "#D08770", "font": {"color": "white"}, "id": 30, "label": "neural network", "shape": "dot", "size": 12, "title": "neural network\nLabel: Network\nDegree: 1"}, {"color": "#EBCB8B", "font": {"color": "white"}, "id": 31, "label": "31", "shape": "dot", "size": 12, "title": "31\nLabel: ModelArchitecture\nDegree: 1"}, {"color": "#D8DEE9", "font": {"color": "white"}, "id": 32, "label": "English", "shape": "dot", "size": 24, "title": "English\nLabel: Language\nDegree: 7"}, {"color": "#D8DEE9", "font": {"color": "white"}, "id": 33, "label": "French", "shape": "dot", "size": 24, "title": "French\nLabel: Language\nDegree: 7"}, {"color": "#5E81AC", "font": {"color": "white"}, "id": 34, "label": "phrase-based system", "shape": "dot", "size": 10, "title": "phrase-based system\nLabel: Approach\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 35, "label": "soft-alignment", "shape": "dot", "size": 12, "title": "soft-alignment\nLabel: Technique\nDegree: 1"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 36, "label": "Kalchbrenner", "shape": "dot", "size": 10, "title": "Kalchbrenner\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 37, "label": "Blunsom", "shape": "dot", "size": 10, "title": "Blunsom\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 38, "label": "Sutskever", "shape": "dot", "size": 10, "title": "Sutskever\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 39, "label": "Cho", "shape": "dot", "size": 10, "title": "Cho\nLabel: Person\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 40, "label": "phrase-based translation system", "shape": "dot", "size": 10, "title": "phrase-based translation system\nLabel: System\nDegree: 0"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 41, "label": "Moses", "shape": "dot", "size": 12, "title": "Moses\nLabel: Software\nDegree: 1"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 42, "label": "long short-term memory", "shape": "dot", "size": 16, "title": "long short-term memory\nLabel: LSTM\nDegree: 3"}, {"color": "#B48EAD", "font": {"color": "white"}, "id": 43, "label": "SGD", "shape": "dot", "size": 16, "title": "SGD\nLabel: Algorithm\nDegree: 3"}, {"color": "#BF616A", "font": {"color": "white"}, "id": 44, "label": "Adadelta", "shape": "dot", "size": 18, "title": "Adadelta\nLabel: TrainingRegime\nDegree: 4"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 45, "label": "Zeiler", "shape": "dot", "size": 12, "title": "Zeiler\nLabel: Person\nDegree: 1"}, {"color": "#D08770", "font": {"color": "white"}, "id": 46, "label": "46", "shape": "dot", "size": 12, "title": "46\nLabel: Alignment\nDegree: 1"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 47, "label": "ACL WMT \u201914", "shape": "dot", "size": 12, "title": "ACL WMT \u201914\nLabel: Organization\nDegree: 1"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 48, "label": "Axelrod", "shape": "dot", "size": 12, "title": "Axelrod\nLabel: Person\nDegree: 1"}, {"color": "#EBCB8B", "font": {"color": "white"}, "id": 49, "label": "49", "shape": "dot", "size": 10, "title": "49\nLabel: DeepNeuralNetwork\nDegree: 0"}, {"color": "#D8DEE9", "font": {"color": "white"}, "id": 50, "label": "50", "shape": "dot", "size": 12, "title": "50\nLabel: Training\nDegree: 1"}, {"color": "#5E81AC", "font": {"color": "white"}, "id": 51, "label": "51", "shape": "dot", "size": 10, "title": "51\nLabel: Tool\nDegree: 0"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 52, "label": "NSERC", "shape": "dot", "size": 10, "title": "NSERC\nLabel: Organization\nDegree: 0"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 53, "label": "Calcul Qu\u00b4ebec", "shape": "dot", "size": 10, "title": "Calcul Qu\u00b4ebec\nLabel: Organization\nDegree: 0"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 54, "label": "Compute Canada", "shape": "dot", "size": 10, "title": "Compute Canada\nLabel: Organization\nDegree: 0"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 55, "label": "CIFAR", "shape": "dot", "size": 20, "title": "CIFAR\nLabel: Organization\nDegree: 5"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 56, "label": "Planet Intelligent Systems GmbH", "shape": "dot", "size": 12, "title": "Planet Intelligent Systems GmbH\nLabel: Company\nDegree: 1"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 57, "label": "Felix Hill", "shape": "dot", "size": 10, "title": "Felix Hill\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 58, "label": "Bart van Merri\u00b4enboer", "shape": "dot", "size": 10, "title": "Bart van Merri\u00b4enboer\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 59, "label": "Jean Pouget-Abadie", "shape": "dot", "size": 10, "title": "Jean Pouget-Abadie\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 60, "label": "Coline Devin", "shape": "dot", "size": 10, "title": "Coline Devin\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 61, "label": "Tae-Ho Kim", "shape": "dot", "size": 10, "title": "Tae-Ho Kim\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 62, "label": "Bergstra", "shape": "dot", "size": 10, "title": "Bergstra\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 63, "label": "Bastien", "shape": "dot", "size": 10, "title": "Bastien\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 64, "label": "Lamblin", "shape": "dot", "size": 10, "title": "Lamblin\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 65, "label": "Pascanu", "shape": "dot", "size": 10, "title": "Pascanu\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 66, "label": "Goodfellow", "shape": "dot", "size": 10, "title": "Goodfellow\nLabel: Person\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 67, "label": "Audio chord recognition with recurrent neural networks", "shape": "dot", "size": 10, "title": "Audio chord recognition with recurrent neural networks\nLabel: Publication\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 68, "label": "Vincent", "shape": "dot", "size": 10, "title": "Vincent\nLabel: Person\nDegree: 0"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 69, "label": "Learning phrase representations using RNN encoder-decoder for statistical machine translation", "shape": "dot", "size": 20, "title": "Learning phrase representations using RNN encoder-decoder for statistical machine translation\nLabel: ConferencePaper\nDegree: 5"}, {"color": "#8FBCBB", "font": {"color": "white"}, "id": 70, "label": "On the properties of neural machine translation: Encoder\u2013Decoder approaches", "shape": "dot", "size": 10, "title": "On the properties of neural machine translation: Encoder\u2013Decoder approaches\nLabel: ConferencePaper\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 71, "label": "van Merri\u00a8enboer", "shape": "dot", "size": 10, "title": "van Merri\u00a8enboer\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 72, "label": "Bahdanau", "shape": "dot", "size": 10, "title": "Bahdanau\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 73, "label": "Gulcehre", "shape": "dot", "size": 10, "title": "Gulcehre\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 74, "label": "Bougares", "shape": "dot", "size": 10, "title": "Bougares\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 75, "label": "Schwenk", "shape": "dot", "size": 10, "title": "Schwenk\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 76, "label": "Devlin", "shape": "dot", "size": 10, "title": "Devlin\nLabel: Person\nDegree: 0"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 77, "label": "Association for Computational Linguistics", "shape": "dot", "size": 10, "title": "Association for Computational Linguistics\nLabel: Conference\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 78, "label": "Fast and robust neural network joint models for statistical machine translation", "shape": "dot", "size": 10, "title": "Fast and robust neural network joint models for statistical machine translation\nLabel: Publication\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 79, "label": "Zbib", "shape": "dot", "size": 10, "title": "Zbib\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 80, "label": "Huang", "shape": "dot", "size": 10, "title": "Huang\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 81, "label": "Lamar", "shape": "dot", "size": 10, "title": "Lamar\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 82, "label": "Schwartz", "shape": "dot", "size": 10, "title": "Schwartz\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 83, "label": "Makhoul", "shape": "dot", "size": 10, "title": "Makhoul\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 84, "label": "Mira", "shape": "dot", "size": 10, "title": "Mira\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 85, "label": "Moreno-D\u00b4\u0131az", "shape": "dot", "size": 10, "title": "Moreno-D\u00b4\u0131az\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 86, "label": "Cabestany", "shape": "dot", "size": 10, "title": "Cabestany\nLabel: Person\nDegree: 0"}, {"color": "#D8DEE9", "font": {"color": "white"}, "id": 87, "label": "Recursive hetero-associative memories for translation", "shape": "dot", "size": 10, "title": "Recursive hetero-associative memories for translation\nLabel: Grammar\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 88, "label": "Maxout networks", "shape": "dot", "size": 10, "title": "Maxout networks\nLabel: Publication\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 89, "label": "Warde-Farley", "shape": "dot", "size": 10, "title": "Warde-Farley\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 90, "label": "Mirza", "shape": "dot", "size": 10, "title": "Mirza\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 91, "label": "Courville", "shape": "dot", "size": 10, "title": "Courville\nLabel: Person\nDegree: 0"}, {"color": "#A3BE8C", "font": {"color": "white"}, "id": 92, "label": "Sequence transduction with recurrent neural networks", "shape": "dot", "size": 10, "title": "Sequence transduction with recurrent neural networks\nLabel: Work\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 93, "label": "Generating sequences with recurrent neural networks", "shape": "dot", "size": 10, "title": "Generating sequences with recurrent neural networks\nLabel: Publication\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 94, "label": "Jaitly", "shape": "dot", "size": 10, "title": "Jaitly\nLabel: Person\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 95, "label": "Mohamed", "shape": "dot", "size": 10, "title": "Mohamed\nLabel: Person\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 96, "label": "Hybrid speech recognition with deep bidirectional LSTM", "shape": "dot", "size": 10, "title": "Hybrid speech recognition with deep bidirectional LSTM\nLabel: Publication\nDegree: 0"}, {"color": "#81A1C1", "font": {"color": "white"}, "id": 97, "label": "Hermann", "shape": "dot", "size": 10, "title": "Hermann\nLabel: Person\nDegree: 0"}, {"color": "#88C0D0", "font": {"color": "white"}, "id": 98, "label": "Multilingual distributed representations without word alignment", "shape": "dot", "size": 10, "title": "Multilingual distributed representations without word alignment\nLabel: Publication\nDegree: 0"}, {"color": "#B48EAD", "font": {"color": "white"}, "id": 99, "label": "99", "shape": "dot", "size": 10, "title": "99\nLabel: RNN\nDegree: 0"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": 0, "label": "HAS", "to": 4}, {"arrows": "to", "from": 0, "label": "HAS", "to": 15}, {"arrows": "to", "from": 0, "label": "HAS", "to": 16}, {"arrows": "to", "from": 0, "label": "HAS", "to": 17}, {"arrows": "to", "from": 6, "label": "INPUT_TO", "to": 9}, {"arrows": "to", "from": 7, "label": "INPUT_TO", "to": 12}, {"arrows": "to", "from": 9, "label": "OUTPUT_FROM", "to": 8}, {"arrows": "to", "from": 9, "label": "CONTAINS", "to": 10}, {"arrows": "to", "from": 10, "label": "USES_GRAMMAR", "to": 3}, {"arrows": "to", "from": 10, "label": "HAS_INPUT", "to": 6}, {"arrows": "to", "from": 10, "label": "HAS_INPUT", "to": 7}, {"arrows": "to", "from": 10, "label": "HAS_HIDDEN_LAYER", "to": 11}, {"arrows": "to", "from": 10, "label": "HAS_HIDDEN_LAYER", "to": 13}, {"arrows": "to", "from": 11, "label": "LOCATED_IN", "to": 0}, {"arrows": "to", "from": 12, "label": "CONTAINS", "to": 10}, {"arrows": "to", "from": 12, "label": "OUTPUT_FROM", "to": 14}, {"arrows": "to", "from": 13, "label": "LOCATED_IN", "to": 0}, {"arrows": "to", "from": 15, "label": "BELONGS_TO", "to": 18}, {"arrows": "to", "from": 15, "label": "BELONGS_TO", "to": 19}, {"arrows": "to", "from": 16, "label": "BELONGS_TO", "to": 18}, {"arrows": "to", "from": 16, "label": "BELONGS_TO", "to": 19}, {"arrows": "to", "from": 17, "label": "BELONGS_TO", "to": 18}, {"arrows": "to", "from": 17, "label": "BELONGS_TO", "to": 19}, {"arrows": "to", "from": 20, "label": "PUBLISHED_AT", "to": 24}, {"arrows": "to", "from": 20, "label": "MENTIONED", "to": 32}, {"arrows": "to", "from": 20, "label": "MENTIONED", "to": 33}, {"arrows": "to", "from": 20, "label": "USED", "to": 47}, {"arrows": "to", "from": 20, "label": "USED", "to": 50}, {"arrows": "to", "from": 21, "label": "AUTHORED", "to": 20}, {"arrows": "to", "from": 21, "label": "AFFILIATED_WITH", "to": 22}, {"arrows": "to", "from": 21, "label": "WORKS_AT", "to": 22}, {"arrows": "to", "from": 21, "label": "ATTENDED", "to": 24}, {"arrows": "to", "from": 25, "label": "AUTHORED", "to": 20}, {"arrows": "to", "from": 25, "label": "ATTENDED", "to": 24}, {"arrows": "to", "from": 25, "label": "AFFILIATED_WITH", "to": 26}, {"arrows": "to", "from": 27, "label": "AUTHORED", "to": 20}, {"arrows": "to", "from": 27, "label": "ATTENDED", "to": 24}, {"arrows": "to", "from": 27, "label": "INVOLVED_IN", "to": 28}, {"arrows": "to", "from": 27, "label": "AFFILIATED_WITH", "to": 55}, {"arrows": "to", "from": 27, "label": "WORKS_AT", "to": 55}, {"arrows": "to", "from": 28, "label": "COMPARED_TO", "to": 29}, {"arrows": "to", "from": 28, "label": "USES_ALIGNMENT", "to": 46}, {"arrows": "to", "from": 31, "label": "USES", "to": 30}, {"arrows": "to", "from": 41, "label": "DEVELOPED_BY", "to": 23}, {"arrows": "to", "from": 43, "label": "PROPOSED_BY", "to": 45}, {"arrows": "to", "from": 69, "label": "AUTHORS", "to": 21}, {"arrows": "to", "from": 69, "label": "AUTHORS", "to": 25}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"font": {"size": 14, "face": "tahoma"}}, "edges": {"font": {"size": 12, "align": "top"}, "smooth": {"type": "dynamic"}}, "physics": {"barnesHut": {"gravitationalConstant": -8000, "springLength": 250, "springConstant": 0.04}, "minVelocity": 0.75}, "interaction": {"navigationButtons": true, "keyboard": true}};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure = {
+  container: document.getElementById("config")
+};
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

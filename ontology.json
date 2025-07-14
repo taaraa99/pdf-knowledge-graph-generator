@@ -1193,6 +1193,834 @@
         }
       ],
       "description": ""
+    },
+    {
+      "label": "Word",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Experiment",
+      "attributes": [
+        {
+          "name": "description",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "ConferencePaper",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "year",
+          "type": "number",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "AlignmentModel",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Number",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "number",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Time",
+      "attributes": [
+        {
+          "name": "duration",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Category",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "License",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Table",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "ResidualDropout",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "LabelSmoothing",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Dropout",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "City",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Country",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Challenge",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Journal",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "NeuralMachineTranslation",
+      "attributes": [
+        {
+          "name": "approach",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "EvaluationMetric",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "MachineTranslationSystem",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Hidden",
+      "attributes": [
+        {
+          "name": "hidden_number",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Net",
+      "attributes": [
+        {
+          "name": "net_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Bleuscore",
+      "attributes": [
+        {
+          "name": "score",
+          "type": "number",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "translation_task",
+          "type": "string",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "EncoderDecoderStructure",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "SequenceTransductionModel",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "AttentionMechanism",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "MultiHeadAttention",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "NeuralInformationProcessingSystems",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "PaperCategory",
+      "attributes": [
+        {
+          "name": "category_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Area",
+      "attributes": [
+        {
+          "name": "area_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Field",
+      "attributes": [
+        {
+          "name": "field_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Degree",
+      "attributes": [
+        {
+          "name": "degree_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Award",
+      "attributes": [
+        {
+          "name": "award_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Material",
+      "attributes": [
+        {
+          "name": "material_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Version",
+      "attributes": [
+        {
+          "name": "version_number",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Funding",
+      "attributes": [
+        {
+          "name": "funding_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Tool",
+      "attributes": [
+        {
+          "name": "tool_name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Project",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "StatisticalMachineTranslationSystem",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Sentence",
+      "attributes": [
+        {
+          "name": "text",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "MachineTranslationTask",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "NeuralNetworkLanguageModel",
+      "attributes": [
+        {
+          "name": "abbreviation",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Team",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "ComponentModel",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "RecurrentNeuralNetwork",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "TrainingCorpus",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "StateOfTheArtPerformance",
+      "attributes": [
+        {
+          "name": "level",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Yin",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Yout",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Wic",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "I",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "J",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "G",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Sc",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "H",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Yc",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Gplus",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Hyperparameter",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Regularization",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "rate",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Optimizer",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "beta1",
+          "type": "number",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "beta2",
+          "type": "number",
+          "unique": false,
+          "required": true
+        },
+        {
+          "name": "epsilon",
+          "type": "number",
+          "unique": false,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "TrainingTime",
+      "attributes": [
+        {
+          "name": "duration",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "GPU",
+      "attributes": [
+        {
+          "name": "model",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "WordPiece",
+      "attributes": [
+        {
+          "name": "size",
+          "type": "number",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "CheckPoint",
+      "attributes": [
+        {
+          "name": "time_interval",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "BeamSearch",
+      "attributes": [
+        {
+          "name": "size",
+          "type": "number",
+          "unique": true,
+          "required": true
+        },
+        {
+          "name": "length_penalty",
+          "type": "number",
+          "unique": false,
+          "required": false
+        }
+      ],
+      "description": ""
+    },
+    {
+      "label": "Gpu",
+      "attributes": [
+        {
+          "name": "model",
+          "type": "string",
+          "unique": true,
+          "required": true
+        }
+      ],
+      "description": ""
     }
   ],
   "relations": [
@@ -2014,6 +2842,556 @@
       },
       "target": {
         "label": "Loss"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PERFORMED",
+      "source": {
+        "label": "NeuralNetwork"
+      },
+      "target": {
+        "label": "Task"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USED",
+      "source": {
+        "label": "Experiment"
+      },
+      "target": {
+        "label": "Dataset"
+      },
+      "attributes": []
+    },
+    {
+      "label": "APPLIED",
+      "source": {
+        "label": "Experiment"
+      },
+      "target": {
+        "label": "Technique"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_INPUT",
+      "source": {
+        "label": "Block"
+      },
+      "target": {
+        "label": "Input"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_GRAMMAR",
+      "source": {
+        "label": "Block"
+      },
+      "target": {
+        "label": "ReberGrammar"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PRODUCES",
+      "source": {
+        "label": "Block"
+      },
+      "target": {
+        "label": "Output"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_HIDDEN_LAYER",
+      "source": {
+        "label": "Block"
+      },
+      "target": {
+        "label": "HiddenLayer"
+      },
+      "attributes": []
+    },
+    {
+      "label": "SUPPORTS",
+      "source": {
+        "label": "Company"
+      },
+      "target": {
+        "label": "University"
+      },
+      "attributes": []
+    },
+    {
+      "label": "AUTHORS",
+      "source": {
+        "label": "ConferencePaper"
+      },
+      "target": {
+        "label": "Person"
+      },
+      "attributes": []
+    },
+    {
+      "label": "LICENSE_FOR",
+      "source": {
+        "label": "Organization"
+      },
+      "target": {
+        "label": "License"
+      },
+      "attributes": []
+    },
+    {
+      "label": "MODEL_SIZE",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Dimension"
+      },
+      "attributes": []
+    },
+    {
+      "label": "CONFIGURED_WITH",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Parameter"
+      },
+      "attributes": []
+    },
+    {
+      "label": "IS_LOCATED_IN",
+      "source": {
+        "label": "Conference"
+      },
+      "target": {
+        "label": "Location"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ACHIEVED_BY",
+      "source": {
+        "label": "Result"
+      },
+      "target": {
+        "label": "Model"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WAS_AT",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "WAS_USED",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Layer"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REPLACED_BY",
+      "source": {
+        "label": "Technique"
+      },
+      "target": {
+        "label": "Technique"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REQUIRED_FOR",
+      "source": {
+        "label": "Dimension"
+      },
+      "target": {
+        "label": "Layer"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_SIZE",
+      "source": {
+        "label": "Vocabulary"
+      },
+      "target": {
+        "label": "Number"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TARGET_TOKEN",
+      "source": {
+        "label": "Dataset"
+      },
+      "target": {
+        "label": "Number"
+      },
+      "attributes": []
+    },
+    {
+      "label": "SOURCE_TOKEN",
+      "source": {
+        "label": "Dataset"
+      },
+      "target": {
+        "label": "Number"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ORGANIZED_BY",
+      "source": {
+        "label": "Conference"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REPRODUCE",
+      "source": {
+        "label": "License"
+      },
+      "target": {
+        "label": "Table"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USED_WITH",
+      "source": {
+        "label": "ResidualDropout"
+      },
+      "target": {
+        "label": "Layer"
+      },
+      "attributes": []
+    },
+    {
+      "label": "DROPOUT_RATE",
+      "source": {
+        "label": "ResidualDropout"
+      },
+      "target": {
+        "label": "Number"
+      },
+      "attributes": []
+    },
+    {
+      "label": "DROPOUT_VALUE",
+      "source": {
+        "label": "LabelSmoothing"
+      },
+      "target": {
+        "label": "Number"
+      },
+      "attributes": []
+    },
+    {
+      "label": "UTILIZES",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Parameter"
+      },
+      "attributes": []
+    },
+    {
+      "label": "MEASURES",
+      "source": {
+        "label": "Technique"
+      },
+      "target": {
+        "label": "Metric"
+      },
+      "attributes": []
+    },
+    {
+      "label": "INVOLVES",
+      "source": {
+        "label": "Experiment"
+      },
+      "target": {
+        "label": "DeepNeuralNetwork"
+      },
+      "attributes": []
+    },
+    {
+      "label": "COMPARES_WITH",
+      "source": {
+        "label": "Experiment"
+      },
+      "target": {
+        "label": "StatisticalMachineTranslation"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PROPOSED",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Model"
+      },
+      "attributes": []
+    },
+    {
+      "label": "CONTAINED_IN",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "Journal"
+      },
+      "attributes": []
+    },
+    {
+      "label": "EVALUATED_BY",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "EvaluationMetric"
+      },
+      "attributes": []
+    },
+    {
+      "label": "COMPARED_TO",
+      "source": {
+        "label": "NeuralMachineTranslation"
+      },
+      "target": {
+        "label": "MachineTranslationSystem"
+      },
+      "attributes": []
+    },
+    {
+      "label": "MODEL_ARCHITECTURE",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "EncoderDecoderStructure"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PAPER_CATEGORY",
+      "source": {
+        "label": "Paper"
+      },
+      "target": {
+        "label": "SequenceTransductionModel"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ACHIEVES_SCORE",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "BLEUScore"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PAPER",
+      "source": {
+        "label": "AttentionMechanism"
+      },
+      "target": {
+        "label": "Paper"
+      },
+      "attributes": []
+    },
+    {
+      "label": "STRUCTURED_USING",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "MultiHeadAttention"
+      },
+      "attributes": []
+    },
+    {
+      "label": "ATTENDED_BY",
+      "source": {
+        "label": "Conference"
+      },
+      "target": {
+        "label": "NeuralInformationProcessingSystems"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_VOCABULARY",
+      "source": {
+        "label": "LongShortTermMemory"
+      },
+      "target": {
+        "label": "Vocabulary"
+      },
+      "attributes": []
+    },
+    {
+      "label": "CONSISTS_OF",
+      "source": {
+        "label": "MachineTranslationSystem"
+      },
+      "target": {
+        "label": "ComponentModel"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TRANSLATES_FROM",
+      "source": {
+        "label": "MachineTranslationSystem"
+      },
+      "target": {
+        "label": "Language"
+      },
+      "attributes": []
+    },
+    {
+      "label": "TRANSLATES_TO",
+      "source": {
+        "label": "MachineTranslationSystem"
+      },
+      "target": {
+        "label": "Language"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_FOR_ALIGNMENT",
+      "source": {
+        "label": "NeuralMachineTranslation"
+      },
+      "target": {
+        "label": "AlignmentModel"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PERFORMS_TASK",
+      "source": {
+        "label": "NeuralMachineTranslation"
+      },
+      "target": {
+        "label": "TranslationTask"
+      },
+      "attributes": []
+    },
+    {
+      "label": "REACHES",
+      "source": {
+        "label": "NeuralMachineTranslation"
+      },
+      "target": {
+        "label": "StateOfTheArtPerformance"
+      },
+      "attributes": []
+    },
+    {
+      "label": "USES_APPROACH",
+      "source": {
+        "label": "NeuralMachineTranslation"
+      },
+      "target": {
+        "label": "Approach"
+      },
+      "attributes": []
+    },
+    {
+      "label": "OPTIMIZED_BY",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Optimizer"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_LAYER",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Layer"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_PARAMETER",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Parameter"
+      },
+      "attributes": []
+    },
+    {
+      "label": "COMPUTES",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "FloatingPointOperation"
+      },
+      "attributes": []
+    },
+    {
+      "label": "HAS_COMPONENT",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Component"
+      },
+      "attributes": []
+    },
+    {
+      "label": "PERFORMED_BY",
+      "source": {
+        "label": "Person"
+      },
+      "target": {
+        "label": "Organization"
+      },
+      "attributes": []
+    },
+    {
+      "label": "CREATED_BY",
+      "source": {
+        "label": "Model"
+      },
+      "target": {
+        "label": "Person"
       },
       "attributes": []
     }

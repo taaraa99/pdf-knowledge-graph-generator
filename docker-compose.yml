@@ -6,7 +6,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - falkordb_data:/data
+      - falkor_data:/var/lib/falkordb
     networks:
       - graphrag-net
     # Healthcheck to ensure FalkorDB is ready before the app starts
@@ -34,7 +34,7 @@ services:
       - ./app:/app/app
       - ./data:/app/data
       - ./ontology.json:/app/ontology.json
-      - ./graph.html:/app/graph.html # Mounts the output file
+      # - ./graph.html:/app/graph.html # Mounts the output file
     networks:
       - graphrag-net
     # Keep the container running to allow for `docker-compose exec` commands
@@ -46,4 +46,4 @@ networks:
     driver: bridge
 
 volumes:
-  falkordb_data:
+  falkor_data:

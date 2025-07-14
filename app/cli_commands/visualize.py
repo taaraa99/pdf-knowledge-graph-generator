@@ -65,9 +65,10 @@ def visualize(
             
             nodes_query = f"""
             MATCH (n)
-            RETURN id(n) AS node_id, labels(n)[0] AS label,
-                   coalesce(n.title, n.name, 'Node ' + id(n)) AS display_text,
-                   size((n)--()) AS degree
+                RETURN id(n) AS node_id,
+                head(labels(n)) AS label,
+                coalesce(n.title, n.name, id(n)) AS display_text,
+                size((n)--()) AS degree
             LIMIT {lim}
             """
             nodes_raw = await r.execute_command("GRAPH.QUERY", config.GRAPH_NAME, nodes_query, "--compact")
@@ -105,9 +106,13 @@ def visualize(
 
         for node_id, label, display_text, degree in nodes:
             net.add_node(node_id, label=str(display_text)[:120], title=f"{display_text}\nLabel: {label}\nDegree: {degree}", color=colour_for(label), shape="dot", size=10 + int(degree) * 2)
+        valid_node_ids = {n[0] for n in nodes}  # Set of all known node IDs
 
         for from_id, to_id, rel_type in edges:
-            net.add_edge(from_id, to_id, label=str(rel_type), arrows="to")
+            if from_id in valid_node_ids and to_id in valid_node_ids:
+                net.add_edge(from_id, to_id, label=str(rel_type), arrows="to")
+        # for from_id, to_id, rel_type in edges:
+        #     net.add_edge(from_id, to_id, label=str(rel_type), arrows="to")
 
         net.show_buttons(filter_=['nodes', 'edges', 'physics'])
         net.set_options("""

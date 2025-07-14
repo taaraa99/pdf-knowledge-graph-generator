@@ -8,7 +8,6 @@ from .cli_commands.schema import schema
 from .cli_commands.visualize import visualize
 from .cli_commands.concepts import concepts
 from .cli_commands.relations import relations
-from .cli_commands.debug_graph import debug_graph
 
 # Create the main Typer application instance
 app = typer.Typer(
